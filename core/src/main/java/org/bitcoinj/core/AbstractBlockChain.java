@@ -487,7 +487,7 @@ public abstract class AbstractBlockChain {
                 checkState(lock.isHeldByCurrentThread());
                 // It connects to somewhere on the chain. Not necessarily the top of the best known chain.
                 //context.checkDifficultyTransitions(storedPrev, block, blockStore);
-                checkDifficultyTransitions(storedPrev, block);
+//                checkDifficultyTransitions(storedPrev, block);
                 connectBlock(block, storedPrev, shouldVerifyTransactions(), filteredTxHashList, filteredTxn);
             }
 
@@ -957,6 +957,7 @@ public abstract class AbstractBlockChain {
             else if (storedPrev.getHeight()+1 >= 15200) { DiffMode = 2; }
         }
 
+
         if (DiffMode == 1) { checkDifficultyTransitions_V1(storedPrev, nextBlock); return; }
         else if (DiffMode == 2) { checkDifficultyTransitions_V2(storedPrev, nextBlock); return;}
         else if (DiffMode == 3) { DarkGravityWave(storedPrev, nextBlock); return;}
@@ -1179,6 +1180,30 @@ public abstract class AbstractBlockChain {
             return;
         }
 
+        if(params.getId().equals(NetworkParameters.ID_TESTNET) &&
+                storedPrev.getChainWork().compareTo(new BigInteger(Utils.HEX.decode("000000000000000000000000000000000000000000000000003e9ccfe0e03e01"))) >= 0)
+        {
+            if (storedPrev.getChainWork().compareTo(new BigInteger(Utils.HEX.decode("000000000000000000000000000000000000000000000000003ff00000000000"))) >= 0) {
+                // recent block is more than 2 hours old
+                if (nextBlock.getTimeSeconds() > storedPrev.getHeader().getTimeSeconds() + 2 * 60 * 60) {
+                    verifyDifficulty(params.getMaxTarget(), storedPrev, nextBlock);
+                    return;
+                }
+                // recent block is more than 10 minutes old
+                if (nextBlock.getTimeSeconds() > storedPrev.getHeader().getTimeSeconds() + NetworkParameters.TARGET_SPACING*4) {
+                    BigInteger newTarget = storedPrev.getHeader().getDifficultyTargetAsInteger().multiply(BigInteger.valueOf(10));
+                    verifyDifficulty(newTarget, storedPrev, nextBlock);
+                    return;
+                }
+            } else {
+                // old stuff
+                if(nextBlock.getTimeSeconds() > storedPrev.getHeader().getTimeSeconds() + NetworkParameters.TARGET_SPACING*2) {
+                    verifyDifficulty(params.getMaxTarget(), storedPrev, nextBlock);
+                    return;
+                }
+            }
+        }
+
         for (int i = 1; BlockReading != null && BlockReading.getHeight() > 0; i++) {
             if (PastBlocksMax > 0 && i > PastBlocksMax) { break; }
             CountBlocks++;
@@ -1234,22 +1259,29 @@ public abstract class AbstractBlockChain {
         // Is this supposed to be a difficulty transition point?
         if ((storedPrev.getHeight() + 1) % params.getInterval() != 0) {
 
+            System.out.println("111111");
+
             // TODO: Refactor this hack after 0.5 is released and we stop supporting deserialization compatibility.
             // This should be a method of the NetworkParameters, which should in turn be using singletons and a subclass
             // for each network type. Then each network can define its own difficulty transition rules.
             if (params.getId().equals(NetworkParameters.ID_TESTNET)) {
+                System.out.println("2222");
                 checkTestnetDifficulty(storedPrev, prev, nextBlock);
+
                 return;
             }
 
             // No ... so check the difficulty didn't actually change.
-            if (nextBlock.getDifficultyTarget() != prev.getDifficultyTarget())
+            if (nextBlock.getDifficultyTarget() != prev.getDifficultyTarget()){
+                System.out.println("3333");
                 throw new VerificationException("Unexpected change in difficulty at height " + storedPrev.getHeight() +
                         ": " + Long.toHexString(nextBlock.getDifficultyTarget()) + " vs " +
                         Long.toHexString(prev.getDifficultyTarget()));
+            }
+
             return;
         }
-
+        System.out.println("4444");
         // We need to find a block far back in the chain. It's OK that this is expensive because it only occurs every
         // two weeks after the initial block chain download.
         long now = System.currentTimeMillis();

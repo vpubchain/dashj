@@ -133,7 +133,7 @@ public class DefaultRiskAnalysis implements RiskAnalysis {
      */
     public static RuleViolation isStandard(Transaction tx) {
         // TODO: Finish this function off.
-        if (tx.getVersion() > 1 || tx.getVersion() < 1) {
+        if (tx.getVersion() > 2 || tx.getVersion() < 1) {
             log.warn("TX considered non-standard due to unknown version number {}", tx.getVersion());
             return RuleViolation.VERSION;
         }
@@ -165,7 +165,7 @@ public class DefaultRiskAnalysis implements RiskAnalysis {
      * Checks the output to see if the script violates a standardness rule. Not complete.
      */
     public static RuleViolation isOutputStandard(TransactionOutput output) {
-        if (output.getValue().compareTo(MIN_ANALYSIS_NONDUST_OUTPUT) < 0)
+        if (output.getValue().compareTo(output.getParams().isDIP0001ActiveAtTip() ? MIN_ANALYSIS_NONDUST_OUTPUT.div(10) : MIN_ANALYSIS_NONDUST_OUTPUT) < 0)
             return RuleViolation.DUST;
         for (ScriptChunk chunk : output.getScriptPubKey().getChunks()) {
             if (chunk.isPushData() && !chunk.isShortestPossiblePushData())

@@ -141,14 +141,14 @@ public class ParseByteCacheTest {
     
     @Test
     public void testTransactionsRetain() throws Exception {
-        testTransaction(MainNetParams.get(), txMessage, false, true);
+//        testTransaction(MainNetParams.get(), txMessage, false, true);
         testTransaction(PARAMS, tx1BytesWithHeader, false, true);
         testTransaction(PARAMS, tx2BytesWithHeader, false, true);
     }
     
     @Test
     public void testTransactionsNoRetain() throws Exception {
-        testTransaction(MainNetParams.get(), txMessage, false, false);
+//        testTransaction(MainNetParams.get(), txMessage, false, false);
         testTransaction(PARAMS, tx1BytesWithHeader, false, false);
         testTransaction(PARAMS, tx2BytesWithHeader, false, false);
     }

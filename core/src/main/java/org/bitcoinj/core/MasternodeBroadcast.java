@@ -178,8 +178,8 @@ public class MasternodeBroadcast extends Masternode {
         }
 
         if (params.getId().equals(NetworkParameters.ID_MAINNET)) {
-            if (address.getPort() != 9999) return false;
-        } else if (address.getPort() == 9999) return false;
+            if (address.getPort() != 9900) return false;
+        } else if (address.getPort() == 9900) return false;
 
         //search existing Masternode list, this is where we update existing Masternodes with new mnb broadcasts
         Masternode pmn = context.masternodeManager.find(vin);
@@ -301,8 +301,8 @@ public class MasternodeBroadcast extends Masternode {
             }
 
             if (params.getId().equals(NetworkParameters.ID_MAINNET)) {
-                if (address.getPort() != 9999) return false;
-            } else if (address.getPort() == 9999) return false;
+                if (address.getPort() != 9900) return false;
+            } else if (address.getPort() == 9900) return false;
 
             //search existing Masternode list, this is where we update existing Masternodes with new mnb broadcasts
             Masternode pmn = context.masternodeManager.find(vin);
