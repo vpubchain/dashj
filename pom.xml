@@ -4,7 +4,11 @@
 
   <groupId>org.dashj</groupId>
   <artifactId>dashj-parent</artifactId>
+<<<<<<< HEAD
   <version>0.14.4.3</version>
+=======
+  <version>0.14.4.7</version>
+>>>>>>> update dashj
   <packaging>pom</packaging>
 
   <modules>

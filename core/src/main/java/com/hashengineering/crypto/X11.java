@@ -19,18 +19,27 @@ public class X11 {
         try {
             log.info("Loading x11 native library...");
             System.loadLibrary("x11");
+<<<<<<< HEAD
 //            System.loadLibrary("F:/escher-0.3.jar");
+=======
+>>>>>>> update dashj
             native_library_loaded = true;
             log.info("Loaded x11 successfully.");
         }
         catch(UnsatisfiedLinkError x)
         {
+<<<<<<< HEAD
             log.error("xxxx");
+=======
+>>>>>>> update dashj
             log.info("Loading x11 failed: " + x.getMessage());
         }
         catch(Exception e)
         {
+<<<<<<< HEAD
             log.error("eeee");
+=======
+>>>>>>> update dashj
             native_library_loaded = false;
             log.info("Loading x11 failed: " + e.getMessage());
         }

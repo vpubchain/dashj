@@ -99,7 +99,11 @@ public class BlockChainTest {
     @Test
     public void testBasicChaining() throws Exception {
         // Check that we can plug a few blocks together and the futures work.
+<<<<<<< HEAD
         ListenableFuture<StoredBlock> future = testNetChain.getHeightFuture(10);
+=======
+        ListenableFuture<StoredBlock> future = testNetChain.getHeightFuture(2);
+>>>>>>> update dashj
         // Block 1 from the testnet.
         Block b1 = getBlock1();
         assertTrue(testNetChain.add(b1));
@@ -423,7 +427,11 @@ public class BlockChainTest {
         BlockChain prod = new BlockChain(new Context(params), new MemoryBlockStore(params));
         Date d = prod.estimateBlockTime(200000);
         // The actual date of block 200,000 was 2015-01-09 02:02:54
+<<<<<<< HEAD
 //        assertEquals(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.US).parse("2014-12-31T23:00:18.000-0800"), d);
+=======
+        assertEquals(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.US).parse("2014-12-31T23:00:18.000-0800"), d);
+>>>>>>> update dashj
     }
 
     @Test

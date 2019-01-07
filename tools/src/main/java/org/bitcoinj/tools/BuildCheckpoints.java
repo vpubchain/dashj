@@ -17,7 +17,10 @@
 
 package org.bitcoinj.tools;
 
+<<<<<<< HEAD
 import jdk.nashorn.internal.parser.JSONParser;
+=======
+>>>>>>> update dashj
 import org.bitcoinj.core.listeners.NewBestBlockListener;
 import org.bitcoinj.core.*;
 import org.bitcoinj.params.MainNetParams;
@@ -92,9 +95,13 @@ public class BuildCheckpoints {
         }
 
         final InetAddress ipAddress;
+<<<<<<< HEAD
 
         if (options.has("peer")) {
             System.out.println("has peer");
+=======
+        if (options.has("peer")) {
+>>>>>>> update dashj
             String peerFlag = (String) options.valueOf("peer");
             try {
                 ipAddress = InetAddress.getByName(peerFlag);
@@ -104,9 +111,13 @@ public class BuildCheckpoints {
                 return;
             }
         } else {
+<<<<<<< HEAD
             System.out.println("no peer");
             ipAddress = InetAddress.getLocalHost();
 
+=======
+            ipAddress = InetAddress.getLocalHost();
+>>>>>>> update dashj
         }
         final PeerAddress peerAddress = new PeerAddress(ipAddress, params.getPort());
 
@@ -122,23 +133,34 @@ public class BuildCheckpoints {
         final PeerGroup peerGroup = new PeerGroup(params, chain);
         System.out.println("Connecting to " + peerAddress + "...");
         peerGroup.addAddress(peerAddress);
+<<<<<<< HEAD
 //        peerGroup.addAddress(InetAddress.getByName("188.226.228.88"));47.104.97.209
         peerGroup.addAddress(InetAddress.getByName("47.104.143.93"));
+=======
+        peerGroup.addAddress(InetAddress.getByName("118.190.201.80"));
+>>>>>>> update dashj
         long now = new Date().getTime() / 1000;
         peerGroup.setFastCatchupTimeSecs(now);
 
         final long timeAgo = now - (86400 * options.valueOf(daysFlag));
+<<<<<<< HEAD
 //        final long timeAgo = now - (options.valueOf(daysFlag));
+=======
+>>>>>>> update dashj
         System.out.println("Checkpointing up to " + Utils.dateTimeFormat(timeAgo * 1000));
 
         chain.addNewBestBlockListener(Threading.SAME_THREAD, new NewBestBlockListener() {
             @Override
             public void notifyNewBestBlock(StoredBlock block) throws VerificationException {
                 int height = block.getHeight();
+<<<<<<< HEAD
 //                System.out.println("区块高度:"+height);
 
                 if (height % CoinDefinition.getIntervalCheckpoints() == 0 && block.getHeader().getTimeSeconds() <= timeAgo) {
                     System.out.println("CoinDefinition.getIntervalCheckpoints:"+CoinDefinition.getIntervalCheckpoints());
+=======
+                if (height % CoinDefinition.getIntervalCheckpoints() == 0 && block.getHeader().getTimeSeconds() <= timeAgo) {
+>>>>>>> update dashj
                     System.out.println(String.format("Checkpointing block %s at height %d, time %s",
                             block.getHeader().getHash(), block.getHeight(), Utils.dateTimeFormat(block.getHeader().getTime())));
                     checkpoints.put(height, block);
@@ -162,7 +184,11 @@ public class BuildCheckpoints {
         store.close();
 
         // Sanity check the created files.
+<<<<<<< HEAD
 //        sanityCheck(plainFile, checkpoints.size());
+=======
+        sanityCheck(plainFile, checkpoints.size());
+>>>>>>> update dashj
         sanityCheck(textFile, checkpoints.size());
     }
 
@@ -207,7 +233,11 @@ public class BuildCheckpoints {
 
     private static void sanityCheck(File file, int expectedSize) throws IOException {
         CheckpointManager manager = new CheckpointManager(params, new FileInputStream(file));
+<<<<<<< HEAD
 //        checkState(manager.numCheckpoints() == expectedSize);
+=======
+        checkState(manager.numCheckpoints() == expectedSize);
+>>>>>>> update dashj
 
         /*
         if (params.getId().equals(NetworkParameters.ID_MAINNET)) {

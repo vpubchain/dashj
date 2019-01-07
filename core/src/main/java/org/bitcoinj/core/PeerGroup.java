@@ -1168,7 +1168,10 @@ public class PeerGroup implements TransactionBroadcaster {
 
     /** Does a blocking startup. */
     public void start() {
+<<<<<<< HEAD
         System.out.println("Does a blocking startup");
+=======
+>>>>>>> update dashj
         Futures.getUnchecked(startAsync());
     }
 

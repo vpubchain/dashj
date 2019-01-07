@@ -957,7 +957,10 @@ public abstract class AbstractBlockChain {
             else if (storedPrev.getHeight()+1 >= 15200) { DiffMode = 2; }
         }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> update dashj
         if (DiffMode == 1) { checkDifficultyTransitions_V1(storedPrev, nextBlock); return; }
         else if (DiffMode == 2) { checkDifficultyTransitions_V2(storedPrev, nextBlock); return;}
         else if (DiffMode == 3) { DarkGravityWave(storedPrev, nextBlock); return;}
@@ -1259,19 +1262,27 @@ public abstract class AbstractBlockChain {
         // Is this supposed to be a difficulty transition point?
         if ((storedPrev.getHeight() + 1) % params.getInterval() != 0) {
 
+<<<<<<< HEAD
             System.out.println("111111");
 
+=======
+>>>>>>> update dashj
             // TODO: Refactor this hack after 0.5 is released and we stop supporting deserialization compatibility.
             // This should be a method of the NetworkParameters, which should in turn be using singletons and a subclass
             // for each network type. Then each network can define its own difficulty transition rules.
             if (params.getId().equals(NetworkParameters.ID_TESTNET)) {
+<<<<<<< HEAD
                 System.out.println("2222");
                 checkTestnetDifficulty(storedPrev, prev, nextBlock);
 
+=======
+                checkTestnetDifficulty(storedPrev, prev, nextBlock);
+>>>>>>> update dashj
                 return;
             }
 
             // No ... so check the difficulty didn't actually change.
+<<<<<<< HEAD
             if (nextBlock.getDifficultyTarget() != prev.getDifficultyTarget()){
                 System.out.println("3333");
                 throw new VerificationException("Unexpected change in difficulty at height " + storedPrev.getHeight() +
@@ -1282,6 +1293,15 @@ public abstract class AbstractBlockChain {
             return;
         }
         System.out.println("4444");
+=======
+            if (nextBlock.getDifficultyTarget() != prev.getDifficultyTarget())
+                throw new VerificationException("Unexpected change in difficulty at height " + storedPrev.getHeight() +
+                        ": " + Long.toHexString(nextBlock.getDifficultyTarget()) + " vs " +
+                        Long.toHexString(prev.getDifficultyTarget()));
+            return;
+        }
+
+>>>>>>> update dashj
         // We need to find a block far back in the chain. It's OK that this is expensive because it only occurs every
         // two weeks after the initial block chain download.
         long now = System.currentTimeMillis();

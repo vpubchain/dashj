@@ -82,7 +82,11 @@ public class CoinDefinition {
     public static final int PROTOCOL_VERSION = 70210;          //version.h PROTOCOL_VERSION
     public static final int MIN_PROTOCOL_VERSION = 70208;        //version.h MIN_PROTO_VERSION
 
+<<<<<<< HEAD
     public static final int BLOCK_CURRENTVERSION = 1;   //CBlock::CURRENT_VERSION
+=======
+    public static final int BLOCK_CURRENTVERSION = 2;   //CBlock::CURRENT_VERSION
+>>>>>>> update dashj
     public static final int MAX_BLOCK_SIZE = 1 * 1000 * 1000;
 
 
@@ -101,8 +105,13 @@ public class CoinDefinition {
     public static final long PacketMagic = 0x900d903c;
 
     //Genesis Block Information from main.cpp: LoadBlockIndex
+<<<<<<< HEAD
     static public long genesisBlockDifficultyTarget = (0x1e0ffff0);         //main.cpp: LoadBlockIndex
     static public long genesisBlockTime = 1543384000;                       //main.cpp: LoadBlockIndex
+=======
+    static public long genesisBlockDifficultyTarget = (0x1e0ffff0L);         //main.cpp: LoadBlockIndex
+    static public long genesisBlockTime = 1543384000L;                       //main.cpp: LoadBlockIndex
+>>>>>>> update dashj
     static public long genesisBlockNonce = (555330);                         //main.cpp: LoadBlockIndex
     static public String genesisHash = "00000d6f81d96969bfa1f195a1e349a6129c720c50a255c50ca38163d8286579"; //main.cpp: hashGenesisBlock
     static public String genesisMerkleRoot = "af02dc24d6c38a8716a1000072ac9a57577013c68bc3db1704ab1fe8f2578ad9";
@@ -116,8 +125,13 @@ public class CoinDefinition {
             //"dnsseed.dash.org",
             //"dnsseed.dashdot.io",
             //"dnsseed.masternode.io",
+<<<<<<< HEAD
 //			"47.104.143.93",
 //			"47.104.97.209",
+=======
+			"dnsseed1.jiulingo.net",
+			"dnsseed2.jiulingo.net",
+>>>>>>> update dashj
     };
 
 
